@@ -12,10 +12,10 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_backend_bucket" {
-      bucket = "terraform-state-aryhbf7tcllqqvqvv59xwdhnxw63er2sxa1ofscw0doo3"
+      bucket = "terraform-state-s8wd8rhtjdfmlxuiht9epfmbqfxns2x9n7s2ho1mka7wp"
 }
 
-resource "aws_instance" "server" {
+resource "aws_instance" "Instance-ARqF" {
       ami = data.aws_ami.amazon_latest.id
       instance_type = "t2.micro"
       lifecycle {
@@ -24,177 +24,131 @@ resource "aws_instance" "server" {
       subnet_id = aws_subnet.devxp_vpc_subnet_public0.id
       associate_public_ip_address = true
       vpc_security_group_ids = [aws_security_group.devxp_security_group.id]
-      iam_instance_profile = aws_iam_instance_profile.server_iam_role_instance_profile.name
+      iam_instance_profile = aws_iam_instance_profile.Instance-ARqF_iam_role_instance_profile.name
 }
 
-resource "aws_eip" "server_eip" {
-      instance = aws_instance.server.id
+resource "aws_eip" "Instance-ARqF_eip" {
+      instance = aws_instance.Instance-ARqF.id
       vpc = true
 }
 
-resource "aws_iam_user" "server_iam" {
-      name = "server_iam"
+resource "aws_s3_bucket" "Bucket-olyu-sTDV-DGiq-crFo-vQQT" {
+      bucket = "Bucket-olyu-sTDV-DGiq-crFo-vQQT"
 }
 
-resource "aws_iam_user_policy_attachment" "server_iam_policy_attachment0" {
-      user = aws_iam_user.server_iam.name
-      policy_arn = aws_iam_policy.server_iam_policy0.arn
-}
-
-resource "aws_iam_policy" "server_iam_policy0" {
-      name = "server_iam_policy0"
-      path = "/"
-      policy = data.aws_iam_policy_document.server_iam_policy_document.json
-}
-
-resource "aws_iam_access_key" "server_iam_access_key" {
-      user = aws_iam_user.server_iam.name
-}
-
-resource "aws_instance" "server-a" {
-      ami = data.aws_ami.amazon_latest.id
-      instance_type = "t2.micro"
-      lifecycle {
-        ignore_changes = [ami]
-      }
-      subnet_id = aws_subnet.devxp_vpc_subnet_public0.id
-      associate_public_ip_address = true
-      vpc_security_group_ids = [aws_security_group.devxp_security_group.id]
-      iam_instance_profile = aws_iam_instance_profile.server-a_iam_role_instance_profile.name
-}
-
-resource "aws_eip" "server-a_eip" {
-      instance = aws_instance.server-a.id
-      vpc = true
-}
-
-resource "aws_iam_user" "server-a_iam" {
-      name = "server-a_iam"
-}
-
-resource "aws_iam_user_policy_attachment" "server-a_iam_policy_attachment0" {
-      user = aws_iam_user.server-a_iam.name
-      policy_arn = aws_iam_policy.server-a_iam_policy0.arn
-}
-
-resource "aws_iam_policy" "server-a_iam_policy0" {
-      name = "server-a_iam_policy0"
-      path = "/"
-      policy = data.aws_iam_policy_document.server-a_iam_policy_document.json
-}
-
-resource "aws_iam_access_key" "server-a_iam_access_key" {
-      user = aws_iam_user.server-a_iam.name
-}
-
-resource "aws_instance" "server-b" {
-      ami = data.aws_ami.amazon_latest.id
-      instance_type = "t2.micro"
-      lifecycle {
-        ignore_changes = [ami]
-      }
-      subnet_id = aws_subnet.devxp_vpc_subnet_public0.id
-      associate_public_ip_address = true
-      vpc_security_group_ids = [aws_security_group.devxp_security_group.id]
-      iam_instance_profile = aws_iam_instance_profile.server-b_iam_role_instance_profile.name
-}
-
-resource "aws_eip" "server-b_eip" {
-      instance = aws_instance.server-b.id
-      vpc = true
-}
-
-resource "aws_iam_user" "server-b_iam" {
-      name = "server-b_iam"
-}
-
-resource "aws_iam_user_policy_attachment" "server-b_iam_policy_attachment0" {
-      user = aws_iam_user.server-b_iam.name
-      policy_arn = aws_iam_policy.server-b_iam_policy0.arn
-}
-
-resource "aws_iam_policy" "server-b_iam_policy0" {
-      name = "server-b_iam_policy0"
-      path = "/"
-      policy = data.aws_iam_policy_document.server-b_iam_policy_document.json
-}
-
-resource "aws_iam_access_key" "server-b_iam_access_key" {
-      user = aws_iam_user.server-b_iam.name
-}
-
-resource "aws_s3_bucket" "storage-oeijfeijeo" {
-      bucket = "storage-oeijfeijeo"
-}
-
-resource "aws_s3_bucket_public_access_block" "storage-oeijfeijeo_access" {
-      bucket = aws_s3_bucket.storage-oeijfeijeo.id
+resource "aws_s3_bucket_public_access_block" "Bucket-olyu-sTDV-DGiq-crFo-vQQT_access" {
+      bucket = aws_s3_bucket.Bucket-olyu-sTDV-DGiq-crFo-vQQT.id
       block_public_acls = true
       block_public_policy = true
 }
 
-resource "aws_iam_user" "storage-oeijfeijeo_iam" {
-      name = "storage-oeijfeijeo_iam"
+resource "aws_iam_user" "Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam" {
+      name = "Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam"
 }
 
-resource "aws_iam_user_policy_attachment" "storage-oeijfeijeo_iam_policy_attachment0" {
-      user = aws_iam_user.storage-oeijfeijeo_iam.name
-      policy_arn = aws_iam_policy.storage-oeijfeijeo_iam_policy0.arn
+resource "aws_iam_user_policy_attachment" "Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy_attachment0" {
+      user = aws_iam_user.Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam.name
+      policy_arn = aws_iam_policy.Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0.arn
 }
 
-resource "aws_iam_policy" "storage-oeijfeijeo_iam_policy0" {
-      name = "storage-oeijfeijeo_iam_policy0"
+resource "aws_iam_policy" "Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0" {
+      name = "Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0"
       path = "/"
-      policy = data.aws_iam_policy_document.storage-oeijfeijeo_iam_policy_document.json
+      policy = data.aws_iam_policy_document.Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy_document.json
 }
 
-resource "aws_iam_access_key" "storage-oeijfeijeo_iam_access_key" {
-      user = aws_iam_user.storage-oeijfeijeo_iam.name
+resource "aws_iam_access_key" "Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_access_key" {
+      user = aws_iam_user.Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam.name
 }
 
-resource "aws_iam_instance_profile" "server_iam_role_instance_profile" {
-      name = "server_iam_role_instance_profile"
-      role = aws_iam_role.server_iam_role.name
+resource "aws_sns_topic" "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_sns_topic" {
+      name = "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_sns_topic"
 }
 
-resource "aws_iam_instance_profile" "server-a_iam_role_instance_profile" {
-      name = "server-a_iam_role_instance_profile"
-      role = aws_iam_role.server-a_iam_role.name
+resource "aws_glacier_vault" "Glacier-mtdR-VVVI-obyO-mUDG-LSUV" {
+      name = "Glacier-mtdR-VVVI-obyO-mUDG-LSUV"
+      notification {
+        sns_topic = aws_sns_topic.Glacier-mtdR-VVVI-obyO-mUDG-LSUV_sns_topic.arn
+        events = ["ArchiveRetrievalCompleted", "InventoryRetrievalCompleted"]
+      }
 }
 
-resource "aws_iam_instance_profile" "server-b_iam_role_instance_profile" {
-      name = "server-b_iam_role_instance_profile"
-      role = aws_iam_role.server-b_iam_role.name
+resource "aws_iam_user" "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam" {
+      name = "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam"
 }
 
-resource "aws_iam_role" "server_iam_role" {
-      name = "server_iam_role"
+resource "aws_iam_user_policy_attachment" "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy_attachment0" {
+      user = aws_iam_user.Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam.name
+      policy_arn = aws_iam_policy.Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0.arn
+}
+
+resource "aws_iam_policy" "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0" {
+      name = "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0"
+      path = "/"
+      policy = data.aws_iam_policy_document.Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy_document.json
+}
+
+resource "aws_iam_access_key" "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_access_key" {
+      user = aws_iam_user.Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam.name
+}
+
+resource "aws_dynamodb_table" "DynamoDb-Azcw" {
+      name = "DynamoDb-Azcw"
+      hash_key = "username"
+      billing_mode = "PAY_PER_REQUEST"
+      ttl {
+        attribute_name = "TimeToExist"
+        enabled = true
+      }
+      attribute {
+        name = "username"
+        type = "S"
+        _id = "623a37da0a84cbbcdeba62ba"
+      }
+}
+
+resource "aws_iam_user" "DynamoDb-Azcw_iam" {
+      name = "DynamoDb-Azcw_iam"
+}
+
+resource "aws_iam_user_policy_attachment" "DynamoDb-Azcw_iam_policy_attachment0" {
+      user = aws_iam_user.DynamoDb-Azcw_iam.name
+      policy_arn = aws_iam_policy.DynamoDb-Azcw_iam_policy0.arn
+}
+
+resource "aws_iam_policy" "DynamoDb-Azcw_iam_policy0" {
+      name = "DynamoDb-Azcw_iam_policy0"
+      path = "/"
+      policy = data.aws_iam_policy_document.DynamoDb-Azcw_iam_policy_document.json
+}
+
+resource "aws_iam_access_key" "DynamoDb-Azcw_iam_access_key" {
+      user = aws_iam_user.DynamoDb-Azcw_iam.name
+}
+
+resource "aws_iam_instance_profile" "Instance-ARqF_iam_role_instance_profile" {
+      name = "Instance-ARqF_iam_role_instance_profile"
+      role = aws_iam_role.Instance-ARqF_iam_role.name
+}
+
+resource "aws_iam_role" "Instance-ARqF_iam_role" {
+      name = "Instance-ARqF_iam_role"
       assume_role_policy = "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}"
 }
 
-resource "aws_iam_role" "server-a_iam_role" {
-      name = "server-a_iam_role"
-      assume_role_policy = "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}"
+resource "aws_iam_role_policy_attachment" "Instance-ARqF_iam_role_Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0_attachment" {
+      policy_arn = aws_iam_policy.Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0.arn
+      role = aws_iam_role.Instance-ARqF_iam_role.name
 }
 
-resource "aws_iam_role" "server-b_iam_role" {
-      name = "server-b_iam_role"
-      assume_role_policy = "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}"
+resource "aws_iam_role_policy_attachment" "Instance-ARqF_iam_role_Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0_attachment" {
+      policy_arn = aws_iam_policy.Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0.arn
+      role = aws_iam_role.Instance-ARqF_iam_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "server_iam_role_storage-oeijfeijeo_iam_policy0_attachment" {
-      policy_arn = aws_iam_policy.storage-oeijfeijeo_iam_policy0.arn
-      role = aws_iam_role.server_iam_role.name
-}
-
-resource "aws_iam_role_policy_attachment" "server-a_iam_role_storage-oeijfeijeo_iam_policy0_attachment" {
-      policy_arn = aws_iam_policy.storage-oeijfeijeo_iam_policy0.arn
-      role = aws_iam_role.server-a_iam_role.name
-}
-
-resource "aws_iam_role_policy_attachment" "server-b_iam_role_storage-oeijfeijeo_iam_policy0_attachment" {
-      policy_arn = aws_iam_policy.storage-oeijfeijeo_iam_policy0.arn
-      role = aws_iam_role.server-b_iam_role.name
+resource "aws_iam_role_policy_attachment" "Instance-ARqF_iam_role_DynamoDb-Azcw_iam_policy0_attachment" {
+      policy_arn = aws_iam_policy.DynamoDb-Azcw_iam_policy0.arn
+      role = aws_iam_role.Instance-ARqF_iam_role.name
 }
 
 resource "aws_subnet" "devxp_vpc_subnet_public0" {
@@ -244,47 +198,16 @@ resource "aws_security_group" "devxp_security_group" {
       vpc_id = aws_vpc.devxp_vpc.id
       name = "devxp_security_group"
       ingress {
-        from_port = 22
-        to_port = 22
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-      }
-      ingress {
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-      }
-      ingress {
-        from_port = 443
-        to_port = 443
-        protocol = "tcp"
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
       }
       egress {
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
-      }
-      egress {
-        from_port = 443
-        to_port = 443
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-      }
-}
-
-data "aws_iam_policy_document" "server_iam_policy_document" {
-      statement {
-        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
-        effect = "Allow"
-        resources = ["arn:aws:ec2:::*"]
-      }
-      statement {
-        actions = ["iam:PassRole"]
-        effect = "Allow"
-        resources = [aws_instance.server.arn]
       }
 }
 
@@ -301,33 +224,7 @@ data "aws_ami" "amazon_latest" {
       }
 }
 
-data "aws_iam_policy_document" "server-a_iam_policy_document" {
-      statement {
-        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
-        effect = "Allow"
-        resources = ["arn:aws:ec2:::*"]
-      }
-      statement {
-        actions = ["iam:PassRole"]
-        effect = "Allow"
-        resources = [aws_instance.server-a.arn]
-      }
-}
-
-data "aws_iam_policy_document" "server-b_iam_policy_document" {
-      statement {
-        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
-        effect = "Allow"
-        resources = ["arn:aws:ec2:::*"]
-      }
-      statement {
-        actions = ["iam:PassRole"]
-        effect = "Allow"
-        resources = [aws_instance.server-b.arn]
-      }
-}
-
-data "aws_iam_policy_document" "storage-oeijfeijeo_iam_policy_document" {
+data "aws_iam_policy_document" "Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy_document" {
       statement {
         actions = ["s3:ListAllMyBuckets"]
         effect = "Allow"
@@ -336,7 +233,33 @@ data "aws_iam_policy_document" "storage-oeijfeijeo_iam_policy_document" {
       statement {
         actions = ["s3:*"]
         effect = "Allow"
-        resources = [aws_s3_bucket.storage-oeijfeijeo.arn]
+        resources = [aws_s3_bucket.Bucket-olyu-sTDV-DGiq-crFo-vQQT.arn]
+      }
+}
+
+data "aws_iam_policy_document" "Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy_document" {
+      statement {
+        actions = ["glacier:InitiateJob", "glacier:GetJobOutput", "glacier:UploadArchive", "glacier:InitiateMultipartUpload", "glacier:AbortMultipartUpload", "glacier:CompleteMultipartUpload", "glacier:DescribeVault"]
+        effect = "Allow"
+        resources = [aws_glacier_vault.Glacier-mtdR-VVVI-obyO-mUDG-LSUV.arn]
+      }
+      statement {
+        actions = ["glacier:ListVaults"]
+        effect = "Allow"
+        resources = ["*"]
+      }
+}
+
+data "aws_iam_policy_document" "DynamoDb-Azcw_iam_policy_document" {
+      statement {
+        actions = ["dynamodb:DescribeTable", "dynamodb:Query", "dynamodb:Scan", "dynamodb:BatchGet*", "dynamodb:DescribeStream", "dynamodb:DescribeTable", "dynamodb:Get*", "dynamodb:Query", "dynamodb:Scan", "dynamodb:BatchWrite*", "dynamodb:CreateTable", "dynamodb:Delete*", "dynamodb:Update*", "dynamodb:PutItem"]
+        effect = "Allow"
+        resources = [aws_dynamodb_table.DynamoDb-Azcw.arn]
+      }
+      statement {
+        actions = ["dynamodb:List*", "dynamodb:DescribeReservedCapacity*", "dynamodb:DescribeLimits", "dynamodb:DescribeTimeToLive"]
+        effect = "Allow"
+        resources = ["*"]
       }
 }
 
