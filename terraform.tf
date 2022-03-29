@@ -12,10 +12,10 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_backend_bucket" {
-      bucket = "terraform-state-s8wd8rhtjdfmlxuiht9epfmbqfxns2x9n7s2ho1mka7wp"
+      bucket = "terraform-state-katjsfnhom7jlueal6d93rtvbh71ngc1nipqfj94qgkfm"
 }
 
-resource "aws_instance" "Instance-ARqF" {
+resource "aws_instance" "Instance-zsyt" {
       ami = data.aws_ami.amazon_latest.id
       instance_type = "t2.micro"
       lifecycle {
@@ -24,12 +24,12 @@ resource "aws_instance" "Instance-ARqF" {
       subnet_id = aws_subnet.devxp_vpc_subnet_public0.id
       associate_public_ip_address = true
       vpc_security_group_ids = [aws_security_group.devxp_security_group.id]
-      iam_instance_profile = aws_iam_instance_profile.Instance-ARqF_iam_role_instance_profile.name
+      iam_instance_profile = aws_iam_instance_profile.Instance-zsyt_iam_role_instance_profile.name
 }
 
-resource "aws_eip" "Instance-ARqF_eip" {
-      instance = aws_instance.Instance-ARqF.id
+resource "aws_eip" "Instance-zsyt_eip" {
       vpc = true
+      instance = aws_instance.Instance-zsyt.id
 }
 
 resource "aws_s3_bucket" "Bucket-olyu-sTDV-DGiq-crFo-vQQT" {
@@ -126,29 +126,29 @@ resource "aws_iam_access_key" "DynamoDb-Azcw_iam_access_key" {
       user = aws_iam_user.DynamoDb-Azcw_iam.name
 }
 
-resource "aws_iam_instance_profile" "Instance-ARqF_iam_role_instance_profile" {
-      name = "Instance-ARqF_iam_role_instance_profile"
-      role = aws_iam_role.Instance-ARqF_iam_role.name
+resource "aws_iam_instance_profile" "Instance-zsyt_iam_role_instance_profile" {
+      name = "Instance-zsyt_iam_role_instance_profile"
+      role = aws_iam_role.Instance-zsyt_iam_role.name
 }
 
-resource "aws_iam_role" "Instance-ARqF_iam_role" {
-      name = "Instance-ARqF_iam_role"
+resource "aws_iam_role" "Instance-zsyt_iam_role" {
+      name = "Instance-zsyt_iam_role"
       assume_role_policy = "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}"
 }
 
-resource "aws_iam_role_policy_attachment" "Instance-ARqF_iam_role_Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0_attachment" {
+resource "aws_iam_role_policy_attachment" "Instance-zsyt_iam_role_Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0_attachment" {
       policy_arn = aws_iam_policy.Bucket-olyu-sTDV-DGiq-crFo-vQQT_iam_policy0.arn
-      role = aws_iam_role.Instance-ARqF_iam_role.name
+      role = aws_iam_role.Instance-zsyt_iam_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "Instance-ARqF_iam_role_Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0_attachment" {
+resource "aws_iam_role_policy_attachment" "Instance-zsyt_iam_role_Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0_attachment" {
       policy_arn = aws_iam_policy.Glacier-mtdR-VVVI-obyO-mUDG-LSUV_iam_policy0.arn
-      role = aws_iam_role.Instance-ARqF_iam_role.name
+      role = aws_iam_role.Instance-zsyt_iam_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "Instance-ARqF_iam_role_DynamoDb-Azcw_iam_policy0_attachment" {
+resource "aws_iam_role_policy_attachment" "Instance-zsyt_iam_role_DynamoDb-Azcw_iam_policy0_attachment" {
       policy_arn = aws_iam_policy.DynamoDb-Azcw_iam_policy0.arn
-      role = aws_iam_role.Instance-ARqF_iam_role.name
+      role = aws_iam_role.Instance-zsyt_iam_role.name
 }
 
 resource "aws_subnet" "devxp_vpc_subnet_public0" {
