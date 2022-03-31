@@ -1,123 +1,105 @@
 terraform {
   required_providers {
-    aws =  {
-    source = "hashicorp/aws"
-    version = ">= 2.7.0"
+    google =  {
+    source = "hashicorp/google"
+    version = ">= 4.10.0"
     }
   }
 }
 
-provider "aws" {
-    region = "us-west-2"
+provider "google" {
+    project = "devxp-339721"
+    region = "us-west1"
 }
 
-resource "aws_s3_bucket" "terraform_backend_bucket" {
-      bucket = "terraform-state-5yll8e0saw0sdcou0x6h5ze11kb4xl4kqkhepku1wonxh"
+resource "google_storage_bucket" "terraform_backend_bucket" {
+      location = "us-west1"
+      name = "terraform-state-10jx3jbbfj7iwm5v0hf3crppcb2dji9uzabjp3a481flr"
+      project = "devxp-339721"
 }
 
-resource "aws_dynamodb_table" "DynamoDb-dnio" {
-      name = "DynamoDb-dnio"
-      hash_key = "jjj"
-      billing_mode = "PAY_PER_REQUEST"
-      ttl {
-        attribute_name = "TimeToExist"
-        enabled = true
+resource "google_storage_bucket" "storage-bucket-ydzy-lssl-iody-ngoj-noor" {
+      name = "storage-bucket-ydzy-lssl-iody-ngoj-noor"
+      location = "us-west1"
+      project = "devxp-339721"
+}
+
+resource "google_compute_instance" "gce-pspr" {
+      name = "gce-pspr"
+      machine_type = "f1-micro"
+      zone = "us-west1-a"
+      network_interface {
+        network = "default"
       }
-      attribute {
-        name = "jjj"
-        type = "S"
+      boot_disk {
+        initialize_params {
+          image = "ubuntu-2004-focal-v20220204"
+        }
       }
+      project = "devxp-339721"
 }
 
-resource "aws_iam_user" "DynamoDb-dnio_iam" {
-      name = "DynamoDb-dnio_iam"
+resource "google_project_service" "gce-pspr-service" {
+      disable_on_destroy = false
+      service = "compute.googleapis.com"
 }
 
-resource "aws_iam_user_policy_attachment" "DynamoDb-dnio_iam_policy_attachment0" {
-      user = aws_iam_user.DynamoDb-dnio_iam.name
-      policy_arn = aws_iam_policy.DynamoDb-dnio_iam_policy0.arn
-}
-
-resource "aws_iam_policy" "DynamoDb-dnio_iam_policy0" {
-      name = "DynamoDb-dnio_iam_policy0"
-      path = "/"
-      policy = data.aws_iam_policy_document.DynamoDb-dnio_iam_policy_document.json
-}
-
-resource "aws_iam_access_key" "DynamoDb-dnio_iam_access_key" {
-      user = aws_iam_user.DynamoDb-dnio_iam.name
-}
-
-resource "aws_subnet" "devxp_vpc_subnet_public0" {
-      vpc_id = aws_vpc.devxp_vpc.id
-      cidr_block = "10.0.0.0/25"
-      map_public_ip_on_launch = true
-      availability_zone = "us-west-2a"
-}
-
-resource "aws_subnet" "devxp_vpc_subnet_public1" {
-      vpc_id = aws_vpc.devxp_vpc.id
-      cidr_block = "10.0.128.0/25"
-      map_public_ip_on_launch = true
-      availability_zone = "us-west-2b"
-}
-
-resource "aws_internet_gateway" "devxp_vpc_internetgateway" {
-      vpc_id = aws_vpc.devxp_vpc.id
-}
-
-resource "aws_route_table" "devxp_vpc_routetable_pub" {
-      route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway.devxp_vpc_internetgateway.id
+resource "google_cloud_run_service" "test-run-devxp" {
+      name = "test-run-devxp"
+      location = "us-west1"
+      autogenerate_revision_name = true
+      template {
+        spec {
+          containers {
+            image = "gcr.io/devxp-339721/devxp:2faa0b7"
+            env {
+              name = "CONNECTION_STRING"
+              value = var.CLOUD_RUN_CONNECTION_STRING
+            }
+            env {
+              name = "GITHUB_CLIENT_ID"
+              value = var.CLOUD_RUN_GITHUB_CLIENT_ID
+            }
+            env {
+              name = "GITHUB_CLIENT_SECRET"
+              value = var.CLOUD_RUN_GITHUB_CLIENT_SECRET
+            }
+          }
+        }
       }
-      vpc_id = aws_vpc.devxp_vpc.id
-}
-
-resource "aws_route" "devxp_vpc_internet_route" {
-      route_table_id = aws_route_table.devxp_vpc_routetable_pub.id
-      destination_cidr_block = "0.0.0.0/0"
-      gateway_id = aws_internet_gateway.devxp_vpc_internetgateway.id
-}
-
-resource "aws_route_table_association" "devxp_vpc_subnet_public_assoc" {
-      subnet_id = aws_subnet.devxp_vpc_subnet_public0.id
-      route_table_id = aws_route_table.devxp_vpc_routetable_pub.id
-}
-
-resource "aws_vpc" "devxp_vpc" {
-      cidr_block = "10.0.0.0/16"
-      enable_dns_support = true
-      enable_dns_hostnames = true
-}
-
-resource "aws_security_group" "devxp_security_group" {
-      vpc_id = aws_vpc.devxp_vpc.id
-      name = "devxp_security_group"
-      ingress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
+      traffic {
+        percent = 100
+        latest_revision = true
       }
-      egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-      }
+      depends_on = [google_project_service.test-run-devxp-service]
 }
 
-data "aws_iam_policy_document" "DynamoDb-dnio_iam_policy_document" {
-      statement {
-        actions = ["dynamodb:DescribeTable", "dynamodb:Query", "dynamodb:Scan", "dynamodb:BatchGet*", "dynamodb:DescribeStream", "dynamodb:DescribeTable", "dynamodb:Get*", "dynamodb:Query", "dynamodb:Scan", "dynamodb:BatchWrite*", "dynamodb:CreateTable", "dynamodb:Delete*", "dynamodb:Update*", "dynamodb:PutItem"]
-        effect = "Allow"
-        resources = [aws_dynamodb_table.DynamoDb-dnio.arn]
-      }
-      statement {
-        actions = ["dynamodb:List*", "dynamodb:DescribeReservedCapacity*", "dynamodb:DescribeLimits", "dynamodb:DescribeTimeToLive"]
-        effect = "Allow"
-        resources = ["*"]
-      }
+resource "google_cloud_run_service_iam_member" "test-run-devxp-iam" {
+      service = google_cloud_run_service.test-run-devxp.name
+      location = google_cloud_run_service.test-run-devxp.location
+      project = google_cloud_run_service.test-run-devxp.project
+      role = "roles/run.invoker"
+      member = "allUsers"
+}
+
+resource "google_project_service" "test-run-devxp-service" {
+      disable_on_destroy = false
+      service = "run.googleapis.com"
+}
+
+
+variable "CLOUD_RUN_CONNECTION_STRING" {
+    type = string
+    sensitive = true
+}
+
+variable "CLOUD_RUN_GITHUB_CLIENT_ID" {
+    type = string
+    sensitive = true
+}
+
+variable "CLOUD_RUN_GITHUB_CLIENT_SECRET" {
+    type = string
+    sensitive = true
 }
 
