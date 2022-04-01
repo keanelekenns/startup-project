@@ -8,38 +8,38 @@ terraform {
 }
 
 provider "google" {
-    project = "devxp-339721"
+    project = "dj-339721"
     region = "us-west1"
 }
 
 resource "google_storage_bucket" "terraform_backend_bucket" {
       location = "us-west1"
       name = "terraform-state-10jx3jbbfj7iwm5v0hf3crppcb2dji9uzabjp3a481flr"
-      project = "devxp-339721"
+      project = "dj-339721"
 }
 
 resource "google_storage_bucket" "storage-bucket-qitn-qrkv-mhhg-bbjf-ilks" {
       name = "storage-bucket-qitn-qrkv-mhhg-bbjf-ilks"
       location = "us-west1"
-      project = "devxp-339721"
+      project = "dj-339721"
 }
 
 resource "google_storage_bucket" "storage-bucket-gplk-tzyk-hkqn-ttxs-nqlp" {
       name = "storage-bucket-gplk-tzyk-hkqn-ttxs-nqlp"
       location = "us-west1"
-      project = "devxp-339721"
+      project = "dj-339721"
 }
 
 resource "google_storage_bucket" "storage-bucket-entd-eudk-ojpl-itsp-hfha" {
       name = "storage-bucket-entd-eudk-ojpl-itsp-hfha"
       location = "us-west1"
-      project = "devxp-339721"
+      project = "dj-339721"
 }
 
 resource "google_storage_bucket" "storage-bucket-ydzy-lssl-iody-ngoj-noor" {
       name = "storage-bucket-ydzy-lssl-iody-ngoj-noor"
       location = "us-west1"
-      project = "devxp-339721"
+      project = "dj-339721"
 }
 
 resource "google_compute_instance" "gce-pspr" {
@@ -54,7 +54,7 @@ resource "google_compute_instance" "gce-pspr" {
           image = "ubuntu-2004-focal-v20220204"
         }
       }
-      project = "devxp-339721"
+      project = "dj-339721"
 }
 
 resource "google_project_service" "gce-pspr-service" {
