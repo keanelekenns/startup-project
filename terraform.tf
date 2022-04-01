@@ -18,6 +18,12 @@ resource "google_storage_bucket" "terraform_backend_bucket" {
       project = "devxp-339721"
 }
 
+resource "google_storage_bucket" "storage-bucket-entd-eudk-ojpl-itsp-hfha" {
+      name = "storage-bucket-entd-eudk-ojpl-itsp-hfha"
+      location = "us-west1"
+      project = "devxp-339721"
+}
+
 resource "google_storage_bucket" "storage-bucket-ydzy-lssl-iody-ngoj-noor" {
       name = "storage-bucket-ydzy-lssl-iody-ngoj-noor"
       location = "us-west1"
@@ -101,5 +107,9 @@ variable "CLOUD_RUN_GITHUB_CLIENT_ID" {
 variable "CLOUD_RUN_GITHUB_CLIENT_SECRET" {
     type = string
     sensitive = true
+}
+
+output "test-run-devxp-service-url" {
+    value = google_cloud_run_service.test-run-devxp.status[0].url
 }
 
