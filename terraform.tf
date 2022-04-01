@@ -18,6 +18,12 @@ resource "google_storage_bucket" "terraform_backend_bucket" {
       project = "devxp-339721"
 }
 
+resource "google_storage_bucket" "storage-bucket-qitn-qrkv-mhhg-bbjf-ilks" {
+      name = "storage-bucket-qitn-qrkv-mhhg-bbjf-ilks"
+      location = "us-west1"
+      project = "devxp-339721"
+}
+
 resource "google_storage_bucket" "storage-bucket-gplk-tzyk-hkqn-ttxs-nqlp" {
       name = "storage-bucket-gplk-tzyk-hkqn-ttxs-nqlp"
       location = "us-west1"
