@@ -14,31 +14,7 @@ provider "google" {
 
 resource "google_storage_bucket" "terraform_backend_bucket" {
       location = "us-west1"
-      name = "terraform-state-10jx3jbbfj7iwm5v0hf3crppcb2dji9uzabjp3a481flr"
-      project = "dj-339721"
-}
-
-resource "google_storage_bucket" "storage-bucket-qitn-qrkv-mhhg-bbjf-ilks" {
-      name = "storage-bucket-qitn-qrkv-mhhg-bbjf-ilks"
-      location = "us-west1"
-      project = "dj-339721"
-}
-
-resource "google_storage_bucket" "storage-bucket-gplk-tzyk-hkqn-ttxs-nqlp" {
-      name = "storage-bucket-gplk-tzyk-hkqn-ttxs-nqlp"
-      location = "us-west1"
-      project = "dj-339721"
-}
-
-resource "google_storage_bucket" "storage-bucket-entd-eudk-ojpl-itsp-hfha" {
-      name = "storage-bucket-entd-eudk-ojpl-itsp-hfha"
-      location = "us-west1"
-      project = "dj-339721"
-}
-
-resource "google_storage_bucket" "storage-bucket-ydzy-lssl-iody-ngoj-noor" {
-      name = "storage-bucket-ydzy-lssl-iody-ngoj-noor"
-      location = "us-west1"
+      name = "terraform-state-21h1c7a7dqvlvej4vmuy44mofd5rmpd7uqrh3y8cz0m6w"
       project = "dj-339721"
 }
 
@@ -72,15 +48,15 @@ resource "google_cloud_run_service" "test-run-devxp" {
             image = "gcr.io/devxp-339721/devxp:2faa0b7"
             env {
               name = "CONNECTION_STRING"
-              value = var.CLOUD_RUN_CONNECTION_STRING
+              value = var.CONNECTION_STRING
             }
             env {
               name = "GITHUB_CLIENT_ID"
-              value = var.CLOUD_RUN_GITHUB_CLIENT_ID
+              value = var.GITHUB_CLIENT_ID
             }
             env {
               name = "GITHUB_CLIENT_SECRET"
-              value = var.CLOUD_RUN_GITHUB_CLIENT_SECRET
+              value = var.GITHUB_CLIENT_SECRET
             }
           }
         }
@@ -106,17 +82,17 @@ resource "google_project_service" "test-run-devxp-service" {
 }
 
 
-variable "CLOUD_RUN_CONNECTION_STRING" {
+variable "CONNECTION_STRING" {
     type = string
     sensitive = true
 }
 
-variable "CLOUD_RUN_GITHUB_CLIENT_ID" {
+variable "GITHUB_CLIENT_ID" {
     type = string
     sensitive = true
 }
 
-variable "CLOUD_RUN_GITHUB_CLIENT_SECRET" {
+variable "GITHUB_CLIENT_SECRET" {
     type = string
     sensitive = true
 }
