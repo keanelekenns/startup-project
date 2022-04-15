@@ -1,83 +1,192 @@
 terraform {
   required_providers {
-    google =  {
-    source = "hashicorp/google"
-    version = ">= 4.10.0"
+    aws =  {
+    source = "hashicorp/aws"
+    version = ">= 2.7.0"
     }
   }
 }
 
-provider "google" {
-    project = "dj-339721"
-    region = "us-west1"
+provider "aws" {
+    region = "us-west-2"
 }
 
-resource "google_storage_bucket" "terraform_backend_bucket" {
-      location = "us-west1"
-      name = "terraform-state-21h1c7a7dqvlvej4vmuy44mofd5rmpd7uqrh3y8cz0m6w"
-      project = "dj-339721"
+resource "aws_s3_bucket" "terraform_backend_bucket" {
+      bucket = "terraform-state-xtomjxkdi3bxpm597dqg90w533dgqicn0c1w3c52gxw1a"
 }
 
-resource "google_cloud_run_service" "test-run-devxp" {
-      name = "test-run-devxp"
-      location = "us-west1"
-      autogenerate_revision_name = true
-      template {
-        spec {
-          containers {
-            image = "gcr.io/devxp-339721/devxp:2faa0b7"
-            env {
-              name = "CONNECTION_STRING"
-              value = var.CONNECTION_STRING
-            }
-            env {
-              name = "GITHUB_CLIENT_ID"
-              value = var.GITHUB_CLIENT_ID
-            }
-            env {
-              name = "GITHUB_CLIENT_SECRET"
-              value = var.GITHUB_CLIENT_SECRET
-            }
-          }
-        }
+resource "aws_instance" "Instance-zffz-b" {
+      ami = data.aws_ami.amazon_latest.id
+      instance_type = "t2.medium"
+      lifecycle {
+        ignore_changes = [ami]
       }
-      traffic {
-        percent = 100
-        latest_revision = true
+}
+
+resource "aws_iam_user" "Instance-zffz-b_iam" {
+      name = "Instance-zffz-b_iam"
+}
+
+resource "aws_iam_user_policy_attachment" "Instance-zffz-b_iam_policy_attachment0" {
+      user = aws_iam_user.Instance-zffz-b_iam.name
+      policy_arn = aws_iam_policy.Instance-zffz-b_iam_policy0.arn
+}
+
+resource "aws_iam_policy" "Instance-zffz-b_iam_policy0" {
+      name = "Instance-zffz-b_iam_policy0"
+      path = "/"
+      policy = data.aws_iam_policy_document.Instance-zffz-b_iam_policy_document.json
+}
+
+resource "aws_iam_access_key" "Instance-zffz-b_iam_access_key" {
+      user = aws_iam_user.Instance-zffz-b_iam.name
+}
+
+resource "aws_instance" "Instance-zffz-a" {
+      ami = data.aws_ami.amazon_latest.id
+      instance_type = "t2.medium"
+      lifecycle {
+        ignore_changes = [ami]
       }
-      depends_on = [google_project_service.test-run-devxp-service]
 }
 
-resource "google_cloud_run_service_iam_member" "test-run-devxp-iam" {
-      service = google_cloud_run_service.test-run-devxp.name
-      location = google_cloud_run_service.test-run-devxp.location
-      project = google_cloud_run_service.test-run-devxp.project
-      role = "roles/run.invoker"
-      member = "allUsers"
+resource "aws_iam_user" "Instance-zffz-a_iam" {
+      name = "Instance-zffz-a_iam"
 }
 
-resource "google_project_service" "test-run-devxp-service" {
-      disable_on_destroy = false
-      service = "run.googleapis.com"
+resource "aws_iam_user_policy_attachment" "Instance-zffz-a_iam_policy_attachment0" {
+      user = aws_iam_user.Instance-zffz-a_iam.name
+      policy_arn = aws_iam_policy.Instance-zffz-a_iam_policy0.arn
+}
+
+resource "aws_iam_policy" "Instance-zffz-a_iam_policy0" {
+      name = "Instance-zffz-a_iam_policy0"
+      path = "/"
+      policy = data.aws_iam_policy_document.Instance-zffz-a_iam_policy_document.json
+}
+
+resource "aws_iam_access_key" "Instance-zffz-a_iam_access_key" {
+      user = aws_iam_user.Instance-zffz-a_iam.name
+}
+
+resource "aws_instance" "Instance-zffz-d" {
+      ami = data.aws_ami.amazon_latest.id
+      instance_type = "t2.medium"
+      lifecycle {
+        ignore_changes = [ami]
+      }
+}
+
+resource "aws_iam_user" "Instance-zffz-d_iam" {
+      name = "Instance-zffz-d_iam"
+}
+
+resource "aws_iam_user_policy_attachment" "Instance-zffz-d_iam_policy_attachment0" {
+      user = aws_iam_user.Instance-zffz-d_iam.name
+      policy_arn = aws_iam_policy.Instance-zffz-d_iam_policy0.arn
+}
+
+resource "aws_iam_policy" "Instance-zffz-d_iam_policy0" {
+      name = "Instance-zffz-d_iam_policy0"
+      path = "/"
+      policy = data.aws_iam_policy_document.Instance-zffz-d_iam_policy_document.json
+}
+
+resource "aws_iam_access_key" "Instance-zffz-d_iam_access_key" {
+      user = aws_iam_user.Instance-zffz-d_iam.name
+}
+
+resource "aws_instance" "Instance-zffz-c" {
+      ami = data.aws_ami.amazon_latest.id
+      instance_type = "t2.medium"
+      lifecycle {
+        ignore_changes = [ami]
+      }
+}
+
+resource "aws_iam_user" "Instance-zffz-c_iam" {
+      name = "Instance-zffz-c_iam"
+}
+
+resource "aws_iam_user_policy_attachment" "Instance-zffz-c_iam_policy_attachment0" {
+      user = aws_iam_user.Instance-zffz-c_iam.name
+      policy_arn = aws_iam_policy.Instance-zffz-c_iam_policy0.arn
+}
+
+resource "aws_iam_policy" "Instance-zffz-c_iam_policy0" {
+      name = "Instance-zffz-c_iam_policy0"
+      path = "/"
+      policy = data.aws_iam_policy_document.Instance-zffz-c_iam_policy_document.json
+}
+
+resource "aws_iam_access_key" "Instance-zffz-c_iam_access_key" {
+      user = aws_iam_user.Instance-zffz-c_iam.name
+}
+
+data "aws_iam_policy_document" "Instance-zffz-b_iam_policy_document" {
+      statement {
+        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
+        effect = "Allow"
+        resources = ["arn:aws:ec2:::*"]
+      }
+      statement {
+        actions = ["iam:PassRole"]
+        effect = "Allow"
+        resources = [aws_instance.Instance-zffz-b.arn]
+      }
+}
+
+data "aws_ami" "amazon_latest" {
+      most_recent = true
+      owners = ["585441382316"]
+      filter {
+        name = "name"
+        values = ["*AmazonLinux*"]
+      }
+      filter {
+        name = "virtualization-type"
+        values = ["hvm"]
+      }
+}
+
+data "aws_iam_policy_document" "Instance-zffz-a_iam_policy_document" {
+      statement {
+        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
+        effect = "Allow"
+        resources = ["arn:aws:ec2:::*"]
+      }
+      statement {
+        actions = ["iam:PassRole"]
+        effect = "Allow"
+        resources = [aws_instance.Instance-zffz-a.arn]
+      }
+}
+
+data "aws_iam_policy_document" "Instance-zffz-d_iam_policy_document" {
+      statement {
+        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
+        effect = "Allow"
+        resources = ["arn:aws:ec2:::*"]
+      }
+      statement {
+        actions = ["iam:PassRole"]
+        effect = "Allow"
+        resources = [aws_instance.Instance-zffz-d.arn]
+      }
+}
+
+data "aws_iam_policy_document" "Instance-zffz-c_iam_policy_document" {
+      statement {
+        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
+        effect = "Allow"
+        resources = ["arn:aws:ec2:::*"]
+      }
+      statement {
+        actions = ["iam:PassRole"]
+        effect = "Allow"
+        resources = [aws_instance.Instance-zffz-c.arn]
+      }
 }
 
 
-variable "CONNECTION_STRING" {
-    type = string
-    sensitive = true
-}
-
-variable "GITHUB_CLIENT_ID" {
-    type = string
-    sensitive = true
-}
-
-variable "GITHUB_CLIENT_SECRET" {
-    type = string
-    sensitive = true
-}
-
-output "test-run-devxp-service-url" {
-    value = google_cloud_run_service.test-run-devxp.status[0].url
-}
 
