@@ -18,26 +18,6 @@ resource "google_storage_bucket" "terraform_backend_bucket" {
       project = "dj-339721"
 }
 
-resource "google_compute_instance" "gce-pspr" {
-      name = "gce-pspr"
-      machine_type = "f1-micro"
-      zone = "us-west1-a"
-      network_interface {
-        network = "default"
-      }
-      boot_disk {
-        initialize_params {
-          image = "ubuntu-2004-focal-v20220204"
-        }
-      }
-      project = "dj-339721"
-}
-
-resource "google_project_service" "gce-pspr-service" {
-      disable_on_destroy = false
-      service = "compute.googleapis.com"
-}
-
 resource "google_cloud_run_service" "test-run-devxp" {
       name = "test-run-devxp"
       location = "us-west1"
