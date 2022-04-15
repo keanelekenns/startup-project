@@ -15,33 +15,6 @@ resource "aws_s3_bucket" "terraform_backend_bucket" {
       bucket = "terraform-state-xtomjxkdi3bxpm597dqg90w533dgqicn0c1w3c52gxw1a"
 }
 
-resource "aws_instance" "Instance-zffz-b" {
-      ami = data.aws_ami.amazon_latest.id
-      instance_type = "t2.medium"
-      lifecycle {
-        ignore_changes = [ami]
-      }
-}
-
-resource "aws_iam_user" "Instance-zffz-b_iam" {
-      name = "Instance-zffz-b_iam"
-}
-
-resource "aws_iam_user_policy_attachment" "Instance-zffz-b_iam_policy_attachment0" {
-      user = aws_iam_user.Instance-zffz-b_iam.name
-      policy_arn = aws_iam_policy.Instance-zffz-b_iam_policy0.arn
-}
-
-resource "aws_iam_policy" "Instance-zffz-b_iam_policy0" {
-      name = "Instance-zffz-b_iam_policy0"
-      path = "/"
-      policy = data.aws_iam_policy_document.Instance-zffz-b_iam_policy_document.json
-}
-
-resource "aws_iam_access_key" "Instance-zffz-b_iam_access_key" {
-      user = aws_iam_user.Instance-zffz-b_iam.name
-}
-
 resource "aws_instance" "Instance-zffz-a" {
       ami = data.aws_ami.amazon_latest.id
       instance_type = "t2.medium"
@@ -123,7 +96,7 @@ resource "aws_iam_access_key" "Instance-zffz-c_iam_access_key" {
       user = aws_iam_user.Instance-zffz-c_iam.name
 }
 
-data "aws_iam_policy_document" "Instance-zffz-b_iam_policy_document" {
+data "aws_iam_policy_document" "Instance-zffz-a_iam_policy_document" {
       statement {
         actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
         effect = "Allow"
@@ -132,7 +105,7 @@ data "aws_iam_policy_document" "Instance-zffz-b_iam_policy_document" {
       statement {
         actions = ["iam:PassRole"]
         effect = "Allow"
-        resources = [aws_instance.Instance-zffz-b.arn]
+        resources = [aws_instance.Instance-zffz-a.arn]
       }
 }
 
@@ -146,19 +119,6 @@ data "aws_ami" "amazon_latest" {
       filter {
         name = "virtualization-type"
         values = ["hvm"]
-      }
-}
-
-data "aws_iam_policy_document" "Instance-zffz-a_iam_policy_document" {
-      statement {
-        actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
-        effect = "Allow"
-        resources = ["arn:aws:ec2:::*"]
-      }
-      statement {
-        actions = ["iam:PassRole"]
-        effect = "Allow"
-        resources = [aws_instance.Instance-zffz-a.arn]
       }
 }
 
